@@ -1,0 +1,55 @@
+La liste des formations est : <br><br>
+ {% for f in formations %}
+  Reference: {{ f.ref }}<br>
+  Title: {{ f.Titre }}<br>
+  Description: {{ f.Description }}<br>
+  Start Date: {{ f.date_debut }}<br>
+  End Date: {{ f.date_fin }}<br><table><td>
+  Number of Participants: {{ f.nb_participants }}
+{% if f.nb_participants==0 %}
+<button><a href="{{ path('nom', {'nom': f.Titre}) }}" type="submit">Participer</a></button>
+{% endif %}</td></table><br>
+{% endfor %}
+
+Les formations sont :<br>
+ {% for f in formations %}
+  {{f.Titre|upper}}<br>
+{% endfor %}
+
+<br> Le nombre de fomations est : 
+ {{ formations|length }} 
+<br><br>Les formations theorique sont : <br>
+ {% for f in formations %}
+ {% if f.Description =='formation theorique'%}
+ {{f.Titre}}<br>
+ {% endif %}
+ {% endfor %}
+<br><br>La formation ayant le plus grand nombre de participants :
+  {% set nb=0 %}
+  {% set t=" " %}
+   {% for f in formations %}
+  {% if f.nb_participants>nb %}
+  {% set nb=f.nb_participants %}
+  {% set t=f.Titre %}
+{% endif %}
+ {% endfor %}{{t}}<br>
+<br>Le nombre total de participants dans toutes les formation est : 
+  {% set nbTotal=0 %}
+ {% for f in formations %}
+ {% set nbTotal=nbTotal+f.nb_participants %}
+ {% endfor %}
+{{nbTotal}}<br><br>
+{% if formations is not empty %} 
+ Tableau rempli
+{% else %}
+Tableau vide ou non défini
+{% endif %}<br> 
+
+
+
+
+
+      
+
+
+
